@@ -14,6 +14,7 @@ var config = {
     devBaseUrl: 'http://localhost',
     paths: {
         html: './src/*.html',
+        images: './src/images/*',
         js: './src/**/*.js',
         mainJs: './src/main.js',
         css: [
@@ -28,7 +29,7 @@ var config = {
 gulp.task('connect', function() {
     connect.server({
         root: ['dist'],
-        port: config.post,
+        port: config.port,
         base: config.devBaseUrl,
         livereload: true
     });
@@ -37,7 +38,7 @@ gulp.task('connect', function() {
 //open web app
 gulp.task('open', ['connect'], function() {
     gulp.src('dist/index.html')
-        .pipe(open({ url: config.devBaseUrl + ':' + config.port + '/' }));
+        .pipe(open({ uri: config.devBaseUrl + ':' + config.port + '/' }));
 });
 
 //copy files
@@ -65,6 +66,16 @@ gulp.task('css', function() {
         .pipe(gulp.dest(config.paths.dist + '/css'));
 });
 
+//copy images
+gulp.task('images', function() {
+    gulp.src(config.paths.images)
+        .pipe(gulp.dest(config.paths.dist + '/images'))
+        .pipe(connect.reload());
+
+    gulp.src('./src/favicon.ico')
+        .pipe(gulp.dest(config.paths.dist));
+});
+
 //lint
 gulp.task('lint', function() {
     return gulp.src(config.paths.js)
@@ -78,4 +89,4 @@ gulp.task('watch', function() {
     gulp.watch(config.paths.js, ['js', 'lint']);
 });
 
-gulp.task('default', ['html', 'js', 'css', 'lint', 'open', 'watch']);
+gulp.task('default', ['html', 'js', 'css', 'images', 'lint', 'open', 'watch']);
