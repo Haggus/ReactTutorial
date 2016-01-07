@@ -1,41 +1,15 @@
 $ = jQuery = require('jquery');
+
 var React = require('react');
-var Home = require('./components/homePage');
-var Authors = require('./components/authors/authorPage');
-var About = require('./components/about/aboutPage');
-var Header = require('./components/common/header');
+var ReactDOM = require('react-dom');
+var ReactRouter = require('react-router');
+var Router = ReactRouter.Router;
+var routes = require('./routes');
 
-var App = React.createClass({
-    render: function() {
-        var Child;
+var browserHistory = ReactRouter.browserHistory;
+var createBrowserHistory = require('history/lib/createBrowserHistory');
+var history = createBrowserHistory();
 
-        switch (this.props.route) {
-            case 'about':
-                Child = About;
-                break;
-
-            case 'authors':
-                Child = Authors;
-                break;
-
-            default:
-                Child = Home;
-                break;
-        }
-
-        return (
-            <div>
-                <Header/>
-                <Child/>
-            </div>
-        );
-    }
-});
-
-function render() {
-    var route = window.location.hash.substr(1);
-    React.render(<App route={route} />, document.getElementById('app'));
-}
-
-window.addEventListener('hashchange', render);
-render();
+ReactDOM.render(
+    <Router history={history} routes={routes}/>, document.getElementById('app')
+);

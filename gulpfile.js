@@ -8,6 +8,7 @@ var reactify = require('reactify');
 var source = require('vinyl-source-stream');
 var concat = require('gulp-concat');
 var lint = require('gulp-eslint');
+var babel = require('gulp-babel');
 
 var config = {
     port: 9005,
