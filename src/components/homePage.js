@@ -1,10 +1,7 @@
-'use strict';
+import React from 'react'
+import {Router, Link} from 'react-router'
 
-var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
-
-var Home = React.createClass({
+const Home = React.createClass({
     render: function() {
         return (
             <div className="jumbotron">
@@ -12,8 +9,8 @@ var Home = React.createClass({
                 <p>React, React Router and Flux</p>
                 <Link to="about" className="btn btn-primary btn-lg">Learn more</Link>
             </div>
-        );
+        )
     }
-});
+})
 
-module.exports = Home;
+module.exports = Home

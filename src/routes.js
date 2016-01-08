@@ -1,21 +1,14 @@
-'use strict';
+import React from 'react'
+import {Router, Route, IndexRoute, Redirect} from 'react-router'
 
-var React = require('react');
+import App from './components/app'
+import Home from './components/homePage'
+import NotFound from './components/notFoundPage'
+import Author from './components/authors/authorPage'
+import AuthorManage from './components/authors/manageAuthorPage'
+import About from './components/about/aboutPage'
 
-var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var IndexRoute = ReactRouter.IndexRoute;
-var Redirect = ReactRouter.Redirect;
-
-var App = require('./components/app');
-var Home = require('./components/homePage');
-var NotFound = require('./components/notFoundPage');
-var Author = require('./components/authors/authorPage');
-var AuthorManage = require('./components/authors/manageAuthorPage');
-var About = require('./components/about/aboutPage');
-
-var routes = (
+const routes = (
     <Route path="/" component={App}>
         <IndexRoute component={Home} />
         <Route path="authors" component={Author} />
@@ -26,6 +19,6 @@ var routes = (
             <Redirect from="about/*" to="about" />
         <Route path="*" component={NotFound} />
     </Route>
-);
+)
 
-module.exports = routes;
+module.exports = routes

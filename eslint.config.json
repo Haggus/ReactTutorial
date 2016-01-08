@@ -8,6 +8,7 @@
     "node": true,
     "jquery": true
   },
+  "parser": "babel-eslint",
   "rules": {
     "quotes": 0,
     "no-trailing-spaces": 0,
