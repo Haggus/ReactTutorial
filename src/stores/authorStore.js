@@ -6,7 +6,7 @@ import _ from 'lodash'
 
 const CHANGE_EVENT = 'change'
 
-const authors = []
+let authors = []
 
 const AuthorStore = assign({}, EventEmitter.prototype, {
 
@@ -34,9 +34,19 @@ const AuthorStore = assign({}, EventEmitter.prototype, {
 Dispatcher.register(function(action) {
 
     switch(action.actionType) {
+
+        case ActionTypes.INITIALIZE:
+            authors = action.initialData.authors;
+            AuthorStore.emitChange();
+            break;
+
         case ActionTypes.CREATE_AUTHOR:
             authors.push(action.author)
             AuthorStore.emitChange();
+            break;
+
+        default:
+            break;
     }
 })
 
