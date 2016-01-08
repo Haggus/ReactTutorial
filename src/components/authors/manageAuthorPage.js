@@ -7,16 +7,33 @@ var AuthorApi = require('../../api/authorApi');
 var toastr = require('toastr');
 
 var ManageAuthorPage = React.createClass({
-    mixins: [Router.History],
+    mixins: [Router.History, Router.Lifecycle],
+
+    routerWillLeave: function() {
+        if (this.state.dirty && !confirm('Leave without saving?')) {
+            return false;
+        }
+    },
 
     getInitialState: function() {
         return {
             author: { id: '', firstName: '', lastName: '' },
-            errors: {}
+            errors: {},
+            dirty: false
         };
     },
 
+    componentWillMount: function() {
+        var authorId = this.props.params.id;
+        console.log(authorId);
+
+        if (authorId) {
+            this.setState({author: AuthorApi.getAuthorById(authorId)});
+        }
+    },
+
     setAuthorState: function(event) {
+        this.setState({dirty: true});
         var field = event.target.name;
         var value = event.target.value;
         this.state.author[field] = value;
@@ -49,6 +66,8 @@ var ManageAuthorPage = React.createClass({
         }
 
         AuthorApi.saveAuthor(this.state.author);
+        this.state.dirty = false
+        this.setState({dirty: this.state.dirty});
         toastr.success('Author saved');
         this.history.pushState(null, 'authors');
     },

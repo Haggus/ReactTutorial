@@ -2,10 +2,9 @@
 
 var React = require('react');
 var Router = require('react-router');
-var Lifecycle = Router.Lifecycle;
 
 var About = React.createClass({
-    mixins: [Lifecycle],
+    mixins: [Router.Lifecycle],
 
     routerWillLeave: function() {
         if (true) {

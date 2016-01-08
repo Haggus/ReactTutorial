@@ -20,9 +20,10 @@ var routes = (
         <IndexRoute component={Home} />
         <Route path="authors" component={Author} />
         <Route path="author" component={AuthorManage} />
+            <Route path="author/:id" component={AuthorManage} />
         <Route path="about" component={About} />
-        <Redirect from="about-us" to="about" />
-        <Redirect from="about/*" to="about" />
+            <Redirect from="about-us" to="about" />
+            <Redirect from="about/*" to="about" />
         <Route path="*" component={NotFound} />
     </Route>
 );
