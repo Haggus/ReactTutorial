@@ -7,9 +7,10 @@ var Router = ReactRouter.Router;
 var routes = require('./routes');
 
 var browserHistory = ReactRouter.browserHistory;
-var createBrowserHistory = require('history/lib/createBrowserHistory');
-var history = createBrowserHistory();
+
+// var createBrowserHistory = require('history/lib/createBrowserHistory');
+// var browserHistory = createBrowserHistory();
 
 ReactDOM.render(
-    <Router history={history} routes={routes}/>, document.getElementById('app')
+    <Router history={browserHistory} routes={routes}/>, document.getElementById('app')
 );
