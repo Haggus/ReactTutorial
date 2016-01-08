@@ -1,5 +1,6 @@
 {
   "ecmaFeatures": {
+    "modules": true,
     "jsx": true
   },
   "env": {
