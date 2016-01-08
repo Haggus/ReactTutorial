@@ -1,21 +1,17 @@
-'use strict';
+import React from 'react'
+import {Router, Link} from 'react-router'
+import AuthorActions from '../../actions/authorActions'
+import AuthorStore from '../../stores/authorStore'
+import AuthorList from './authorList'
 
-var React = require('react');
-var Link = require('react-router').Link;
-var AuthorApi = require('../../api/authorApi');
-var AuthorList = require('./authorList');
+const AuthorPage = React.createClass({
 
-var AuthorPage = React.createClass({
     getInitialState: function() {
         return {
-            authors: []
-        };
-    },
-    componentDidMount: function() {
-        if (this.isMounted()) {
-            this.setState({ authors: AuthorApi.getAllAuthors() });
+            authors: AuthorStore.getAllAuthors()
         }
     },
+
     render: function() {
         return (
             <div>
@@ -23,8 +19,8 @@ var AuthorPage = React.createClass({
                 <Link to="author" className="btn btn-default">Add Author</Link>
                 <AuthorList authors={this.state.authors} />
             </div>
-        );
+        )
     }
-});
+})
 
-module.exports = AuthorPage;
+module.exports = AuthorPage

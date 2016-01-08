@@ -1,13 +1,12 @@
-'use strict';
-
-var React = require('react');
-var Router = require('react-router');
-var AuthorForm = require('./authorForm');
-var AuthorApi = require('../../api/authorApi');
-var toastr = require('toastr');
+import React from 'react'
+import {Router, History, Lifecycle} from 'react-router'
+import AuthorForm from './authorForm'
+import AuthorActions from '../../actions/authorActions'
+import AuthorStore from '../../stores/authorStore'
+import toastr from 'toastr'
 
 var ManageAuthorPage = React.createClass({
-    mixins: [Router.History, Router.Lifecycle],
+    mixins: [History, Lifecycle],
 
     routerWillLeave: function() {
         if (this.state.dirty && !confirm('Leave without saving?')) {
@@ -27,7 +26,7 @@ var ManageAuthorPage = React.createClass({
         var authorId = this.props.params.id;
 
         if (authorId) {
-            this.setState({author: AuthorApi.getAuthorById(authorId)});
+            this.setState({author: AuthorStore.getAuthorById(authorId)});
         }
     },
 
@@ -64,7 +63,7 @@ var ManageAuthorPage = React.createClass({
             return;
         }
 
-        AuthorApi.saveAuthor(this.state.author);
+        AuthorActions.createAuthor(this.state.author);
         this.state.dirty = false
         this.setState({dirty: this.state.dirty});
         toastr.success('Author saved');
